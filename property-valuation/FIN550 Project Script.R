@@ -1,6 +1,4 @@
-# Title: FinalProject_FIN550
-# Group Name: Decision Three
-# Authors: Dwijesh Reddy NallappaReddy, Nikhil Reddy Satti, Rushali Naikoti
+
 
 # Time to run the whole file: 35-40 mins 
 # --------------------------------------------------
