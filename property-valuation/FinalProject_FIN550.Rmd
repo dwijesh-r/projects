@@ -1,6 +1,6 @@
 ---
 title: "FinalProject_FIN550"
-author: "Dwijesh Reddy NallappaReddy, Nikhil Reddy Satti, Rushali Naikoti"
+author: Dwijesh Reddy Nallapa Reddy
 date: "2023-11-24"
 output: html_document
 ---
