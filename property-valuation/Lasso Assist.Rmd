@@ -1,0 +1,111 @@
+---
+title: "Lasso Assist"
+author: "Nikhil Reddy"
+date: "2023-11-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+install.packages("corrplot")
+```
+
+```{r}
+# convert a data frame of predictors to a matrix and create dummy variables for character variables 
+
+f <- formula(sale_price ~ 0 + .) 
+
+x <- model.matrix(f, data=df)
+
+# outcome 
+y <- df$sale_price
+```
+
+
+```{r}
+# fit a lasso regression model 
+set.seed(1)
+fit<-cv.glmnet(x=x, y=y)
+
+# Display the sequence of lambda values 
+fit$lambda
+
+lambda.best<-fit$lambda.min 
+lambda.best
+
+```
+
+
+
+```{r}
+coef.best <- coef(fit, 
+                     s = lambda.best)
+
+# Assuming coef.best is your matrix of coefficients for a single lambda
+# Extract coefficients
+coefficients <- coef.best
+
+# Print non-zero coefficients
+cat("Non-zero coefficients:\n")
+for (i in seq_along(coefficients)) {
+  if (coefficients[i] != 0) {
+    cat("Variable Name:", rownames(coefficients)[i], "\tCoefficient Value:", coefficients[i], "\n")
+  }
+}
+
+
+```
+
+```{r}
+for (i in seq_along(coefficients)) {
+  if (coefficients[i] != 0) {
+    cat(rownames(coefficients)[i], "\n")
+  }
+}
+```
+
+
+```{r}
+
+plot(fit, cex.lab=1.5, cex.axis=1.5)
+
+```
+
+```{r}
+
+# ```{r}
+# 
+# # Create the neural network with 1 hidden layers (e.g., 10 neurons in each layer)
+# nn_model <- neuralnet(
+#   formula_nn,
+#   data = train_data,
+#   hidden = 10,
+#   linear.output = TRUE,
+#   stepmax = 1e6  # Adjust the stepmax value
+# )
+# Plot the neural network
+# plot(nn_model)
+# ```{r}
+
+<!-- # Print the summary of the neural network -->
+<!-- print(nn_model) -->
+
+<!-- # Make predictions on the training data -->
+<!-- predictions_nn <- predict(nn_model, newdata = train_data) -->
+
+<!-- ``` -->
+<!-- #  -->
+# ```
+
+
+```
+
+
+```{r}
+
+  install.packages("rsq")
+
+```

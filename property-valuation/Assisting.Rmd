@@ -1,0 +1,52 @@
+---
+title: "raw_data"
+author: "Nikhil Reddy"
+date: "2023-11-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#load libraries
+library(glmnet)
+library(ggplot2)
+library(tidyverse)
+```
+
+
+```{r}
+# load the data 
+df <- read.csv("codebook.csv")
+
+unique_data <- df[, c("var_name_standard", "var_data_type", "var_notes")]
+
+
+# first six rows
+head(unique_data)
+
+unique_data <- distinct(unique_data)
+
+# column names
+names(df)
+```
+
+```{r}
+
+df <- read.csv("historic_property_data.csv")
+df <- df %>% select(-"meta_cdu", -"char_apts", -"char_tp_plan", -"char_tp_dsgn", -"char_attic_fnsh", -"char_renovation", -"char_porch")
+
+
+contains_words <- unique_data$var_name_standard %in% names(df)
+
+result_df <- unique_data[contains_words, ]
+```
+
+
+```{r}
+install.packages("xgboost")
+
+```
+
